@@ -1,6 +1,5 @@
-
- {
-  "GameDirectory": "/data/ark",
+{
+  "GameDirectory": "\/data\/ark",
   "ControlPassword": "passwordhere",
   "ControlPort": 1337,
   "LaunchCommandLine": "TheIsland?listen -server -log",
@@ -9,4 +8,4 @@
   "AllowARKRemoteSelfUpdate": true,
   "SettingOverrides": {},
   "Mods": []
- }
+}

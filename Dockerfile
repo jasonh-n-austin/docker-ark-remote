@@ -19,19 +19,19 @@ RUN apt-get update \
     && useradd -d /data/ark -s /bin/bash --uid 1000 ark \
     && chown -R ark: /data/ark \
     && wget -P /tmp http://arklauncher.sadface.co.uk/Download/Remote/ARKRemote.zip \
-    && mkdir /data/ark/ARKRemote \
-    && unzip -d /data/ark/ARKRemote /tmp/ARKRemote.zip \
+    && mkdir /data/arkremote \
+    && chown -R ark: /data/arkremote \
+    && unzip -d /data/arkremote /tmp/ARKRemote.zip \
     && rm -rf /tmp/* \
-    && sed -i "s/passwordhere/$REMOTEPASSWORD/g" /data/ark/ARKRemote/ARKRemoteConfig.json
 
 EXPOSE 27015/udp 7778/udp
 EXPOSE 32330/tcp
 EXPOSE 1337/tcp
 
-ADD ARKRemoteConfig.json /data/ark/ARKRemote/ARKRemoteConfig.json
-ADD arkremote.sh /usr/local/bin/ark
+COPY ARKRemoteConfig.json /data/arkremote/ARKRemoteConfig.json
+COPY arkremote.sh /usr/local/bin/ark
 
 USER ark
 VOLUME /data/ark
-WORKDIR /data/ark/ARKRemote
-CMD ["ark"]
+WORKDIR /data/ark
+CMD ["/usr/local/bin/ark"]

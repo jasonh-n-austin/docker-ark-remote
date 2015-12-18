@@ -33,7 +33,9 @@ echo -e "Updating ARK...\n"
 
 
 # Start ARKRemote
+sed -i "s/passwordhere/$REMOTEPASSWORD/g" /data/arkremote/ARKRemoteConfig.json
 cd /data/ark/arkdedicated/ShooterGame/Binaries/Linux/
 export LD_LIBRARY_PATH=/data/ark/arkdedicated/
 
-/usr/bin/mono /data/ark/ARKRemote/ARKRemote.exe
+cd /data/arkremote
+/usr/bin/mono /data/arkremote/ARKRemote.exe
