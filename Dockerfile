@@ -22,15 +22,16 @@ RUN apt-get update \
     && mkdir /data/ark/ARKRemote \
     && unzip -d /data/ark/ARKRemote /tmp/ARKRemote.zip \
     && rm -rf /tmp/* \
-    && sed -i "s/\"X\:\\\\Servers\\\\ARK/\/data\/ark/g" /data/ark/ARKRemote/ARKRemoteConfig.json \
     && sed -i "s/passwordhere/$REMOTEPASSWORD/g" /data/ark/ARKRemote/ARKRemoteConfig.json
 
 EXPOSE 27015/udp 7778/udp
 EXPOSE 32330/tcp
+EXPOSE 1337/tcp
 
+ADD ARKRemoteConfig.json /data/ark/ARKRemote/ARKRemoteConfig.json
 ADD arkremote.sh /usr/local/bin/ark
 
 USER ark
 VOLUME /data/ark
 WORKDIR /data/ark/ARKRemote
-CMD ["/usr/local/bin/ark"]
+CMD ["ark"]
